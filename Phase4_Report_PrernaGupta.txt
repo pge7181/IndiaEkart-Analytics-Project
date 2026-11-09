@@ -1,0 +1,127 @@
+================================================================================
+                        INDIAKART BUSINESS PERFORMANCE REPORT
+================================================================================
+To:      Chief Executive Officer, IndiaKart
+From:    Prerna Gupta (Data Analytics Intern)
+Date:    November 9, 2026
+Subject: Overall business health, key findings, risks, and growth opportunities
+
+This report is based on the company's full dataset: 50,000 orders, 10,000
+registered customers, plus product, payment, return, and warehouse inventory
+records covering mid-2020 through mid-2025.
+
+--------------------------------------------------------------------------------
+1. EXECUTIVE SUMMARY
+--------------------------------------------------------------------------------
+IndiaKart is fundamentally a healthy business with a large and loyal customer
+base, but it has stopped growing. Over the last five years the company has
+processed 50,000 orders worth about 2.9 billion rupees, and roughly two out of
+every three orders reach the customer successfully. Our customers are mostly
+steady, mid-market shoppers, and nearly 9 out of every 10 payments now come
+through digital methods, which keeps collections fast and reliable. However,
+new customer sign-ups have been flat at around 165 per month for five straight
+years, so all current momentum is coming from existing buyers. The two most
+urgent warnings in the data are that about 1 in 5 orders comes back as a
+return, and that more than half of all sales depend on a single product
+category, Electronics. If we fix returns and reignite customer growth, the
+business is well positioned to grow again.
+
+--------------------------------------------------------------------------------
+2. TOP 3 FINDINGS
+--------------------------------------------------------------------------------
+Finding 1: One product category carries more than half the company.
+   Electronics generates about 1.64 billion rupees, roughly 57% of total sales.
+   The next largest category, Sports & Fitness, is only about 497 million.
+   When one category is this dominant, a slowdown there hits the whole company.
+
+Finding 2: Digital payments have won, and Cash on Delivery is fading.
+   UPI alone handles 35% of all orders (17,570 orders), and all digital
+   methods together handle about 88%. Cash on Delivery is down to about 12%.
+   This means faster, safer money collection and lower payment-failure risk.
+
+Finding 3: Our strength is loyal, mid-market customers - not new ones.
+   65% of our 10,000 customers are Regular or Budget shoppers, and only about
+   5% have gone inactive. But new registrations have stayed between roughly
+   140 and 200 per month since mid-2020, with no upward trend. The customer
+   base is solid but not expanding.
+
+--------------------------------------------------------------------------------
+3. RISKS IDENTIFIED
+--------------------------------------------------------------------------------
+* Returns are high and spread everywhere: about 20% of orders come back
+  (roughly 10,000 returns), and no single reason dominates - the ten return
+  reasons each account for roughly 480 to 1,200 cases. Because the causes are
+  spread out (wrong size, damage in transit, wrong item, changed mind), there
+  is no quick single fix; this needs a broad program.
+
+* Cancellations cost real money: 5,996 orders (about 12% of all orders) were
+  cancelled. Together, cancellations and returns put roughly one-fifth of all
+  order volume at risk.
+
+* Revenue concentration: with Electronics at 57% of sales, any supply issue,
+  price war, or demand drop in that category would damage total revenue
+  immediately.
+
+* Flat customer growth: acquisition has been stuck at ~165 new customers per
+  month for five years. Meanwhile 480 existing customers have gone inactive.
+
+* Stock-out exposure: 78 of 1,000 warehouse inventory lines (7.8%) are already
+  flagged Low Stock or Out of Stock, with items sitting at 8-30 units against
+  reorder points of 30-50. Mumbai-WH1 holds the smallest buffer of the six
+  warehouses (32,400 units vs. up to 47,400 elsewhere).
+
+--------------------------------------------------------------------------------
+4. OPPORTUNITIES
+--------------------------------------------------------------------------------
+* Grow the second tier of categories. Fashion (148 million), Home & Kitchen
+  (244 million), and Automotive (123 million) already have real sales and can
+  be grown with focused promotions, reducing our dependence on Electronics.
+
+* Monetize the customers we already have. Converting even part of the 1,488
+  "New" customers into regular buyers, and winning back the 480 inactive ones,
+  is cheaper than acquiring strangers - and the flat signup trend makes this
+  the most reliable growth lever available.
+
+* Recover money lost to returns and cancellations. Every 1% reduction in the
+  return rate protects roughly 25-30 million rupees of sales per year. Since
+  return reasons are spread across many causes, a series of small fixes
+  (sizing help, packaging, accurate descriptions) adds up quickly.
+
+* Use our balanced warehouse network as a strength. Stock is spread evenly
+  across six warehouses, so faster replenishment and redistribution between
+  them is an operational task, not a capital project.
+
+--------------------------------------------------------------------------------
+5. RECOMMENDATIONS
+--------------------------------------------------------------------------------
+1. Launch a "Return Reduction Program" this quarter. Add size guides and
+   photos for apparel, double-check fragile-item packaging, and audit product
+   descriptions for accuracy. Target: bring the ~20% return rate below 15%
+   within two quarters, and report the number monthly on the Operations
+   dashboard.
+
+2. Set up automatic low-stock alerts. Today 78 inventory lines are below or
+   near their reorder levels. Configure an automatic alert (the Inventory
+   Alert dashboard already tracks these) so purchasing reorders before items
+   run out, starting with Mumbai-WH1.
+
+3. Run a win-back and conversion campaign. Contact the 480 inactive customers
+   with a targeted offer, and give the 1,488 newest customers a reason to make
+   a second purchase within 60 days. Track both groups monthly on the Customer
+   Insight dashboard.
+
+4. Deliberately grow non-Electronics categories. Pick Fashion, Home & Kitchen,
+   and Automotive for seasonal promotions and cross-sell bundles with
+   Electronics orders. Goal: raise their combined share of revenue over the
+   next four quarters to reduce single-category risk.
+
+5. Keep backing UPI, and watch Cash on Delivery. Digital payments already
+   carry 88% of orders; continue fee incentives for UPI users and monitor
+   whether the remaining 12% cash share keeps shrinking, since that improves
+   cash flow and reduces payment failures.
+
+--------------------------------------------------------------------------------
+All figures in this report come from the company's verified dashboards
+(Revenue Overview, Category Performance, Customer Insight, Operations, and
+Inventory Alert) built on the cleaned Phase 1-3 datasets.
+================================================================================
