@@ -1,0 +1,1801 @@
+{
+  "datasets": [
+    {
+      "name": "8c564947",
+      "displayName": "customers",
+      "config": {
+        "version": "1.1",
+        "source": "workspace.default.customers",
+        "dimensions": [
+          {
+            "expr": "source.*"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    },
+    {
+      "name": "e718d0cc",
+      "displayName": "inventory",
+      "config": {
+        "version": "1.1",
+        "source": "workspace.default.inventory",
+        "dimensions": [
+          {
+            "expr": "source.*"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    },
+    {
+      "name": "a716a437",
+      "displayName": "order_items",
+      "config": {
+        "version": "1.1",
+        "source": "workspace.default.order_items",
+        "dimensions": [
+          {
+            "expr": "source.*"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    },
+    {
+      "name": "10c77e7e",
+      "displayName": "orders",
+      "config": {
+        "version": "1.1",
+        "source": "workspace.default.orders",
+        "dimensions": [
+          {
+            "expr": "source.*"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          },
+          {
+            "name": "total_gmv",
+            "expr": "SUM(source.total_amount)"
+          },
+          {
+            "name": "aov",
+            "expr": "SUM(source.total_amount) / COUNT(*)"
+          },
+          {
+            "name": "cancellation_rate",
+            "expr": "SUM(CASE WHEN upper(source.status) LIKE 'CANCEL%' THEN 1.0 ELSE 0.0 END) / COUNT(*)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "3fbadda3",
+      "displayName": "payments",
+      "config": {
+        "version": "1.1",
+        "source": "workspace.default.payments",
+        "dimensions": [
+          {
+            "expr": "source.*"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    },
+    {
+      "name": "e44b2ec7",
+      "displayName": "products",
+      "config": {
+        "version": "1.1",
+        "source": "workspace.default.products",
+        "dimensions": [
+          {
+            "expr": "source.*"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    },
+    {
+      "name": "d4193212",
+      "displayName": "returns",
+      "config": {
+        "version": "1.1",
+        "source": "workspace.default.returns",
+        "dimensions": [
+          {
+            "expr": "source.*"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    },
+    {
+      "name": "7c7b9d71",
+      "displayName": "suppliers",
+      "config": {
+        "version": "1.1",
+        "source": "workspace.default.suppliers",
+        "dimensions": [
+          {
+            "expr": "source.*"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    }
+  ],
+  "relationshipGraphs": [
+    {
+      "sources": [
+        {
+          "name": "customers",
+          "datasetName": "8c564947"
+        },
+        {
+          "name": "inventory",
+          "datasetName": "e718d0cc"
+        },
+        {
+          "name": "order_items",
+          "datasetName": "a716a437"
+        },
+        {
+          "name": "orders",
+          "datasetName": "10c77e7e"
+        },
+        {
+          "name": "payments",
+          "datasetName": "3fbadda3"
+        },
+        {
+          "name": "products",
+          "datasetName": "e44b2ec7"
+        },
+        {
+          "name": "returns",
+          "datasetName": "d4193212"
+        },
+        {
+          "name": "suppliers",
+          "datasetName": "7c7b9d71"
+        }
+      ],
+      "relationships": [
+        {
+          "name": "products_suppliers",
+          "from": "products",
+          "to": "suppliers",
+          "on": "`products`.`supplier_id` = `suppliers`.`supplier_id`",
+          "cardinality": "CARDINALITY_MANY_TO_ONE"
+        },
+        {
+          "name": "inventory_products",
+          "from": "inventory",
+          "to": "products",
+          "on": "`inventory`.`product_id` = `products`.`product_id`",
+          "cardinality": "CARDINALITY_MANY_TO_ONE"
+        },
+        {
+          "name": "orders_customers",
+          "from": "orders",
+          "to": "customers",
+          "on": "`orders`.`customer_id` = `customers`.`customer_id`",
+          "cardinality": "CARDINALITY_MANY_TO_ONE"
+        },
+        {
+          "name": "order_items_orders",
+          "from": "order_items",
+          "to": "orders",
+          "on": "`order_items`.`order_id` = `orders`.`order_id`",
+          "cardinality": "CARDINALITY_MANY_TO_ONE"
+        },
+        {
+          "name": "order_items_products",
+          "from": "order_items",
+          "to": "products",
+          "on": "`order_items`.`product_id` = `products`.`product_id`",
+          "cardinality": "CARDINALITY_MANY_TO_ONE"
+        },
+        {
+          "name": "payments_orders",
+          "from": "payments",
+          "to": "orders",
+          "on": "`payments`.`order_id` = `orders`.`order_id`",
+          "cardinality": "CARDINALITY_MANY_TO_ONE"
+        },
+        {
+          "name": "relationship_0",
+          "from": "returns",
+          "to": "order_items",
+          "on": "`returns`.`order_id` = `order_items`.`order_id`",
+          "cardinality": "CARDINALITY_MANY_TO_ONE"
+        }
+      ],
+      "measureExpressions": [
+        {
+          "name": "category_return_rate",
+          "expression": "COUNT(DISTINCT `returns`.`order_id`) / COUNT(DISTINCT `order_items`.`order_id`)"
+        }
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "name": "32455994",
+      "displayName": "Revenue Overview",
+      "layout": [
+        {
+          "widget": {
+            "name": "title_header",
+            "spec": {
+              "version": 1,
+              "widgetType": "text",
+              "encodings": {
+                "text": {
+                  "fields": [],
+                  "lines": [
+                    "# Revenue Overview",
+                    "",
+                    "Monthly GMV trends, order volume, average order value, and cancellation health."
+                  ]
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 12,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "order_date_filter",
+            "queries": [
+              {
+                "name": "_orders__order_date",
+                "query": {
+                  "fields": [
+                    {
+                      "name": "orders__order_date",
+                      "expression": "`orders`.`order_date`"
+                    },
+                    {
+                      "name": "orders__order_date_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "showTitle": true,
+                "title": "Order Date Range"
+              },
+              "widgetType": "filter-date-range-picker",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "orders__order_date",
+                    "queryName": "_orders__order_date"
+                  }
+                ]
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "total_orders_card",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "fields": [
+                    {
+                      "name": "count(orders__order_id)",
+                      "expression": "COUNT(`orders`.`order_id`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "Total Orders"
+              },
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "count(orders__order_id)"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 2,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "aov_card",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "fields": [
+                    {
+                      "name": "measure(orders__aov)",
+                      "expression": "MEASURE(`orders`.`aov`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "Average Order Value"
+              },
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "measure(orders__aov)"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 2,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "cancellation_rate_card",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "fields": [
+                    {
+                      "name": "measure(orders__cancellation_rate)",
+                      "expression": "MEASURE(`orders`.`cancellation_rate`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "Cancellation Rate"
+              },
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "measure(orders__cancellation_rate)"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 9,
+            "y": 2,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "monthly_gmv_trend",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "fields": [
+                    {
+                      "name": "monthly(orders__order_date)",
+                      "expression": "DATE_TRUNC(\"MONTH\", `orders`.`order_date`)"
+                    },
+                    {
+                      "name": "measure(orders__total_gmv)",
+                      "expression": "MEASURE(`orders`.`total_gmv`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "Monthly GMV Trend"
+              },
+              "version": 3,
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "monthly(orders__order_date)",
+                  "scale": {
+                    "type": "temporal"
+                  }
+                },
+                "y": {
+                  "fieldName": "measure(orders__total_gmv)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 5,
+            "width": 8,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "gmv_by_category",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "fields": [
+                    {
+                      "name": "order_items__category",
+                      "expression": "`order_items`.`category`"
+                    },
+                    {
+                      "name": "sum(order_items__total_price)",
+                      "expression": "SUM(`order_items`.`total_price`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "GMV by Category"
+              },
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "order_items__category",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(order_items__total_price)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 8,
+            "y": 5,
+            "width": 4,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "key_insights",
+            "spec": {
+              "version": 1,
+              "widgetType": "text",
+              "encodings": {
+                "text": {
+                  "fields": [],
+                  "lines": [
+                    "## Key Insights",
+                    "- **Steady GMV, no strong seasonality:** Monthly GMV has held a ₹114–138M band since mid-2023 (partial launch month Jun 2023 aside), peaking at **₹137.9M in Jan 2025** — revenue growth is volume-driven rather than seasonal.",
+                    "- **Concentrated category mix:** **Electronics drives ~57% of category GMV (₹1.64B)** — more than 3× the next category, Sports & Fitness (₹497M). Combined with a **~12% cancellation rate** (1 in 8 orders), category concentration and cancellations are the two revenue risks to watch."
+                  ]
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 11,
+            "width": 12,
+            "height": 4
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    },
+    {
+      "name": "f24d5195",
+      "displayName": "Category Performance",
+      "layout": [
+        {
+          "widget": {
+            "name": "title_header",
+            "spec": {
+              "version": 1,
+              "widgetType": "text",
+              "encodings": {
+                "text": {
+                  "fields": [],
+                  "lines": [
+                    "# Category Performance",
+                    "",
+                    "Revenue concentration, top products, and return behavior by category."
+                  ]
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 12,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "category_filter",
+            "queries": [
+              {
+                "name": "_order_items__category",
+                "query": {
+                  "fields": [
+                    {
+                      "name": "order_items__category",
+                      "expression": "`order_items`.`category`"
+                    },
+                    {
+                      "name": "order_items__category_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "showTitle": true,
+                "title": "Category Filter"
+              },
+              "widgetType": "filter-multi-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "order_items__category",
+                    "queryName": "_order_items__category"
+                  }
+                ]
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 3,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "revenue_by_category",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "fields": [
+                    {
+                      "name": "order_items__category",
+                      "expression": "`order_items`.`category`"
+                    },
+                    {
+                      "name": "sum(order_items__total_price)",
+                      "expression": "SUM(`order_items`.`total_price`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "Revenue by Category"
+              },
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "order_items__category",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "y-reversed"
+                    }
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(order_items__total_price)",
+                  "format": {
+                    "abbreviation": "compact",
+                    "currencyCode": "INR",
+                    "decimalPlaces": {
+                      "places": 1,
+                      "type": "max"
+                    },
+                    "type": "number-currency"
+                  },
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 2,
+            "width": 5,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "return_rate_by_category",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "fields": [
+                    {
+                      "name": "order_items__category",
+                      "expression": "`order_items`.`category`"
+                    },
+                    {
+                      "name": "measure(category_return_rate)",
+                      "expression": "MEASURE(`category_return_rate`)"
+                    }
+                  ],
+                  "filters": [
+                    {
+                      "expression": "`order_items`.`category` IS NOT NULL"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": {
+                  "value": "Return Rate by Category",
+                  "fields": []
+                }
+              },
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "order_items__category",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "y-reversed"
+                    }
+                  }
+                },
+                "y": {
+                  "fieldName": "measure(category_return_rate)",
+                  "format": {
+                    "decimalPlaces": {
+                      "places": 1,
+                      "type": "max"
+                    },
+                    "type": "number-percent"
+                  },
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 8,
+            "y": 2,
+            "width": 4,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "top10_products_by_revenue",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "fields": [
+                    {
+                      "name": "order_items__product_name",
+                      "expression": "`order_items`.`product_name`"
+                    },
+                    {
+                      "name": "sum(order_items__total_price)",
+                      "expression": "SUM(`order_items`.`total_price`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "Top 10 Products by Revenue"
+              },
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "order_items__product_name",
+                  "axis": {
+                    "labelAngle": 45
+                  },
+                  "scale": {
+                    "categorySize": {
+                      "number": 10,
+                      "type": "number-of-categories"
+                    },
+                    "type": "categorical",
+                    "sort": {
+                      "by": "y-reversed"
+                    }
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(order_items__total_price)",
+                  "format": {
+                    "abbreviation": "compact",
+                    "currencyCode": "INR",
+                    "decimalPlaces": {
+                      "places": 1,
+                      "type": "max"
+                    },
+                    "type": "number-currency"
+                  },
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 8,
+            "width": 12,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "insights_text",
+            "spec": {
+              "widgetType": "text",
+              "version": 1,
+              "encodings": {
+                "text": {
+                  "lines": [
+                    "## Key Insights\n",
+                    "- **Revenue is highly concentrated:** Electronics drives ~57% of category GMV (₹1.64B) — more than 3× the next category, Sports & Fitness (₹497M). The top 10 products (₹31M–₹42M each, led by Ambrane Power Bank and Godrej Camera Elite) show revenue spread across brands rather than locked in a single hero product.\n",
+                    "- **Returns are broad-based, not category-specific:** Return rates sit in a narrow 19.7%–21.5% band across all 10 categories (highest: Toys & Baby 21.5%, Sports & Fitness 21.4%; lowest: Beauty & Health 19.7%). With ~1 in 5 orders returned, the fix needs to be company-wide (packaging, sizing, expectations) rather than targeted at one category."
+                  ],
+                  "fields": []
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 14,
+            "width": 12,
+            "height": 4
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    },
+    {
+      "name": "5460d4c1",
+      "displayName": "Customer Insight",
+      "layout": [
+        {
+          "widget": {
+            "name": "title_header",
+            "spec": {
+              "version": 1,
+              "widgetType": "text",
+              "encodings": {
+                "text": {
+                  "fields": [],
+                  "lines": [
+                    "# Customer Insight",
+                    "",
+                    "Customer segmentation, geographic reach, and monthly acquisition trend."
+                  ]
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 12,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "reg_date_filter",
+            "queries": [
+              {
+                "name": "_customers__registration_date",
+                "query": {
+                  "fields": [
+                    {
+                      "name": "customers__registration_date",
+                      "expression": "`customers`.`registration_date`"
+                    },
+                    {
+                      "name": "customers__registration_date_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "showTitle": true,
+                "title": "Registration Date Range"
+              },
+              "widgetType": "filter-date-range-picker",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "customers__registration_date",
+                    "queryName": "_customers__registration_date"
+                  }
+                ]
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 3,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "segment_breakdown",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "fields": [
+                    {
+                      "name": "customers__segment",
+                      "expression": "`customers`.`segment`"
+                    },
+                    {
+                      "name": "countdistinct(customers__customer_id)",
+                      "expression": "COUNT(DISTINCT `customers`.`customer_id`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "Customers by Segment"
+              },
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "customers__segment",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "y-reversed"
+                    }
+                  }
+                },
+                "y": {
+                  "fieldName": "countdistinct(customers__customer_id)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 2,
+            "width": 5,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "top10_states_map",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "fields": [
+                    {
+                      "name": "countdistinct(customers__customer_id)",
+                      "expression": "COUNT(DISTINCT `customers`.`customer_id`)"
+                    },
+                    {
+                      "name": "customers__state",
+                      "expression": "`customers`.`state`"
+                    }
+                  ],
+                  "filters": [
+                    {
+                      "expression": "`customers`.`state` IN ('Uttar Pradesh','Maharashtra','Gujarat','Madhya Pradesh','Tamil Nadu','Karnataka','Rajasthan','West Bengal','Punjab','Jharkhand')"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": {
+                  "value": "Top 10 States by Customers",
+                  "fields": []
+                }
+              },
+              "version": 1,
+              "widgetType": "choropleth-map",
+              "encodings": {
+                "color": {
+                  "fieldName": "countdistinct(customers__customer_id)",
+                  "format": {
+                    "abbreviation": "compact",
+                    "type": "number-plain"
+                  },
+                  "scale": {
+                    "colorRamp": {
+                      "mode": "scheme",
+                      "scheme": "blues"
+                    },
+                    "type": "quantitative"
+                  }
+                },
+                "region": {
+                  "regionType": "mapbox-v4-admin",
+                  "admin0": {
+                    "geographicRole": "admin0-iso-3166-1-alpha-3",
+                    "type": "value",
+                    "value": "IND"
+                  },
+                  "admin1": {
+                    "fieldName": "customers__state",
+                    "geographicRole": "admin1-name",
+                    "type": "field"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 8,
+            "y": 2,
+            "width": 4,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "new_customers_monthly",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "fields": [
+                    {
+                      "name": "monthly(customers__registration_date)",
+                      "expression": "DATE_TRUNC(\"MONTH\", `customers`.`registration_date`)"
+                    },
+                    {
+                      "name": "countdistinct(customers__customer_id)",
+                      "expression": "COUNT(DISTINCT `customers`.`customer_id`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "New Customers per Month"
+              },
+              "version": 3,
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "monthly(customers__registration_date)",
+                  "scale": {
+                    "type": "temporal"
+                  }
+                },
+                "y": {
+                  "fieldName": "countdistinct(customers__customer_id)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 8,
+            "width": 12,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "insights_text",
+            "spec": {
+              "widgetType": "text",
+              "version": 1,
+              "encodings": {
+                "text": {
+                  "lines": [
+                    "## Key Insights\n",
+                    "- **Loyalty skews mid-market, geography skews north/west:** Regular (4,026) and Budget (2,505) customers make up ~65% of the 10K base, with Premium (~1.5K) and New (~1.5K) nearly tied and only ~5% Inactive. Geographically, Uttar Pradesh (1,860) and Maharashtra (1,621) alone hold ~35% of all customers — engagement and revenue risk are concentrated in a handful of states.\n",
+                    "- **Acquisition is steady but flat:** New registrations have run ~140–200 per month (avg ~165) every month since mid-2020 with no sustained upward trend. With top-of-funnel volume plateaued, growth must come from converting the large \"New\" cohort and reactivating the ~480 inactive customers rather than adding signups."
+                  ],
+                  "fields": []
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 14,
+            "width": 12,
+            "height": 4
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    },
+    {
+      "name": "a5333a3e",
+      "displayName": "Operations",
+      "layout": [
+        {
+          "widget": {
+            "name": "ops_title",
+            "spec": {
+              "version": 1,
+              "widgetType": "text",
+              "encodings": {
+                "text": {
+                  "fields": [],
+                  "lines": [
+                    "# Operations",
+                    "",
+                    "Order fulfillment funnel, payment mix, and return reason analysis."
+                  ]
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 12,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "order_date_filter",
+            "queries": [
+              {
+                "name": "_orders__order_date",
+                "query": {
+                  "fields": [
+                    {
+                      "name": "orders__order_date",
+                      "expression": "`orders`.`order_date`"
+                    },
+                    {
+                      "name": "orders__order_date_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "showTitle": true,
+                "title": "Order Date Range"
+              },
+              "widgetType": "filter-date-range-picker",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "orders__order_date",
+                    "queryName": "_orders__order_date"
+                  }
+                ]
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 3,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "status_funnel",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "fields": [
+                    {
+                      "name": "countdistinct(orders__order_id)",
+                      "expression": "COUNT(DISTINCT `orders`.`order_id`)"
+                    },
+                    {
+                      "name": "orders__status",
+                      "expression": "`orders`.`status`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": {
+                  "value": "Order Status Funnel",
+                  "fields": []
+                }
+              },
+              "version": 3,
+              "widgetType": "funnel",
+              "encodings": {
+                "x": {
+                  "fieldName": "countdistinct(orders__order_id)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "orders__status",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "custom-order",
+                      "orderedValues": [
+                        "Delivered",
+                        "Shipped",
+                        "Processing",
+                        "Returned",
+                        "Cancelled"
+                      ]
+                    }
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 2,
+            "width": 5,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "payment_breakdown",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "fields": [
+                    {
+                      "name": "countdistinct(orders__order_id)",
+                      "expression": "COUNT(DISTINCT `orders`.`order_id`)"
+                    },
+                    {
+                      "name": "orders__payment_method",
+                      "expression": "`orders`.`payment_method`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "Payment Method Breakdown"
+              },
+              "version": 3,
+              "widgetType": "pie",
+              "encodings": {
+                "angle": {
+                  "fieldName": "countdistinct(orders__order_id)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "orders__payment_method",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 8,
+            "y": 2,
+            "width": 4,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "return_reasons",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "fields": [
+                    {
+                      "name": "returns__reason",
+                      "expression": "`returns`.`reason`"
+                    },
+                    {
+                      "name": "countdistinct(returns__order_id)",
+                      "expression": "COUNT(DISTINCT `returns`.`order_id`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "Returns by Reason"
+              },
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "returns__reason",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "y-reversed"
+                    }
+                  }
+                },
+                "y": {
+                  "fieldName": "countdistinct(returns__order_id)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 8,
+            "width": 12,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "ops_insights",
+            "spec": {
+              "widgetType": "text",
+              "version": 1,
+              "encodings": {
+                "text": {
+                  "lines": [
+                    "## Key Insights\n",
+                    "- **Fulfillment is healthy but leakage is ~20%:** Of 50K orders, 32.5K (65%) are Delivered and ~7.6K (15%) are still in flight (Processing/Shipped), while 6.0K (12%) were Cancelled and 3.9K (8%) Returned — recovering even a third of that leakage is worth more than new demand.\n",
+                    "- **Digital rails dominate payments; return causes are diffuse:** UPI alone carries 35% of orders and all digital methods ~88% (Cash on Delivery just ~12%). Return reasons are strikingly uniform (477–1,196 per reason, no single dominant driver), so cutting returns requires broad fixes — sizing guidance, QC, and delivery accuracy — rather than one targeted change."
+                  ],
+                  "fields": []
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 14,
+            "width": 12,
+            "height": 4
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    },
+    {
+      "name": "04caccab",
+      "displayName": "Untitled page",
+      "layout": [
+        {
+          "widget": {
+            "name": "inv_title",
+            "spec": {
+              "version": 1,
+              "widgetType": "text",
+              "encodings": {
+                "text": {
+                  "fields": [],
+                  "lines": [
+                    "# Inventory Alert",
+                    "",
+                    "Stock status summary, low stock products, and warehouse distribution."
+                  ]
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 12,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "category_filter",
+            "queries": [
+              {
+                "name": "_products__category",
+                "query": {
+                  "fields": [
+                    {
+                      "name": "products__category",
+                      "expression": "`products`.`category`"
+                    },
+                    {
+                      "name": "products__category_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "showTitle": true,
+                "title": "Category Filter"
+              },
+              "widgetType": "filter-multi-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "products__category",
+                    "queryName": "_products__category"
+                  }
+                ]
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 3,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "status_summary",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "fields": [
+                    {
+                      "name": "count(inventory__inventory_id)",
+                      "expression": "COUNT(`inventory`.`inventory_id`)"
+                    },
+                    {
+                      "name": "inventory__status",
+                      "expression": "`inventory`.`status`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "Stock Status Summary"
+              },
+              "version": 3,
+              "widgetType": "pie",
+              "encodings": {
+                "angle": {
+                  "fieldName": "count(inventory__inventory_id)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "inventory__status",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 2,
+            "width": 5,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "warehouse_distribution",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "fields": [
+                    {
+                      "name": "inventory__warehouse_location",
+                      "expression": "`inventory`.`warehouse_location`"
+                    },
+                    {
+                      "name": "sum(inventory__quantity_available)",
+                      "expression": "SUM(`inventory`.`quantity_available`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "Warehouse Distribution"
+              },
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "inventory__warehouse_location",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "y-reversed"
+                    }
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(inventory__quantity_available)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 8,
+            "y": 2,
+            "width": 4,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "low_stock_products",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "fields": [
+                    {
+                      "name": "products__product_name",
+                      "expression": "`products`.`product_name`"
+                    },
+                    {
+                      "name": "inventory__warehouse_location",
+                      "expression": "`inventory`.`warehouse_location`"
+                    },
+                    {
+                      "name": "inventory__quantity_available",
+                      "expression": "`inventory`.`quantity_available`"
+                    },
+                    {
+                      "name": "inventory__reorder_level",
+                      "expression": "`inventory`.`reorder_level`"
+                    },
+                    {
+                      "name": "inventory__status",
+                      "expression": "`inventory`.`status`"
+                    }
+                  ],
+                  "filters": [
+                    {
+                      "expression": "`inventory`.`status` IN ('Low Stock', 'Out of Stock')"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": {
+                  "value": "Low Stock Products",
+                  "fields": []
+                }
+              },
+              "version": 2,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "products__product_name",
+                    "useForSearch": true
+                  },
+                  {
+                    "fieldName": "inventory__warehouse_location"
+                  },
+                  {
+                    "fieldName": "inventory__quantity_available"
+                  },
+                  {
+                    "fieldName": "inventory__reorder_level"
+                  },
+                  {
+                    "fieldName": "inventory__status"
+                  }
+                ]
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 8,
+            "width": 12,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "inv_insights",
+            "spec": {
+              "widgetType": "text",
+              "version": 1,
+              "encodings": {
+                "text": {
+                  "lines": [
+                    "## Key Insights\n",
+                    "- **~8% of inventory lines need attention:** 78 of 1,000 stock records are flagged — 76 Low Stock and 2 Out of Stock. Low-stock lines sit far below their reorder points (often 8–50 units on hand against reorder levels of 30–50), so replenishment orders should go out before the next demand cycle.\n",
+                    "- **Stock is well balanced across the 6 warehouses:** Available units range from 32.4K (Mumbai-WH1) to 47.4K (Chennai-WH5), a spread of under ~32%. No single warehouse is a bottleneck, but Mumbai-WH1's lower buffer makes it the most exposed to the low-stock lines above."
+                  ],
+                  "fields": []
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 14,
+            "width": 12,
+            "height": 4
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}
