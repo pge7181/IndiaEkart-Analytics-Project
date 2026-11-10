@@ -331,7 +331,10 @@
               "version": 2,
               "frame": {
                 "showTitle": true,
-                "title": "Order Date Range"
+                "title": {
+                  "value": "Order Date Range",
+                  "fields": []
+                }
               },
               "widgetType": "filter-date-range-picker",
               "encodings": {
@@ -645,15 +648,15 @@
             "name": "category_filter",
             "queries": [
               {
-                "name": "_order_items__category",
+                "name": "_products__category",
                 "query": {
                   "fields": [
                     {
-                      "name": "order_items__category",
-                      "expression": "`order_items`.`category`"
+                      "name": "products__category",
+                      "expression": "`products`.`category`"
                     },
                     {
-                      "name": "order_items__category_associativity",
+                      "name": "products__category_associativity",
                       "expression": "COUNT_IF(`associative_filter_predicate_group`)"
                     }
                   ],
@@ -665,14 +668,17 @@
               "version": 2,
               "frame": {
                 "showTitle": true,
-                "title": "Category Filter"
+                "title": {
+                  "fields": [],
+                  "value": "Category Filter"
+                }
               },
               "widgetType": "filter-multi-select",
               "encodings": {
                 "fields": [
                   {
-                    "fieldName": "order_items__category",
-                    "queryName": "_order_items__category"
+                    "fieldName": "products__category",
+                    "queryName": "_products__category"
                   }
                 ]
               }
@@ -979,7 +985,10 @@
               "version": 2,
               "frame": {
                 "showTitle": true,
-                "title": "Registration Date Range"
+                "title": {
+                  "value": "Registration Date Range",
+                  "fields": []
+                }
               },
               "widgetType": "filter-date-range-picker",
               "encodings": {
@@ -1270,7 +1279,10 @@
               "version": 2,
               "frame": {
                 "showTitle": true,
-                "title": "Order Date Range"
+                "title": {
+                  "value": "Order Date Range",
+                  "fields": []
+                }
               },
               "widgetType": "filter-date-range-picker",
               "encodings": {
@@ -1551,7 +1563,10 @@
               "version": 2,
               "frame": {
                 "showTitle": true,
-                "title": "Category Filter"
+                "title": {
+                  "value": "Category Filter",
+                  "fields": []
+                }
               },
               "widgetType": "filter-multi-select",
               "encodings": {
